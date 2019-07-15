@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankerApiPro", "BankerApiPro\BankerApiPro.csproj", "{A4AA12E2-C43A-4166-9F4B-849363542ABF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Api", "BankerApiPro\Banker.Api.csproj", "{A4AA12E2-C43A-4166-9F4B-849363542ABF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Models", "Banker.Models\Banker.Models.csproj", "{4ABC7515-DEE8-49C4-9830-9F431D1892CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.ViewModels", "Banker.Models\Banker.ViewModels.csproj", "{4ABC7515-DEE8-49C4-9830-9F431D1892CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banker.Repository", "Banker.Repository\Banker.Repository.csproj", "{E41DAC6F-92A0-4FED-BCD1-17D88743FABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Repository", "Banker.Repository\Banker.Repository.csproj", "{E41DAC6F-92A0-4FED-BCD1-17D88743FABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banker.Contracts", "Banker.Contracts\Banker.Contracts.csproj", "{73597561-31EE-4332-A58B-29813E398FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Contracts", "Banker.Contracts\Banker.Contracts.csproj", "{73597561-31EE-4332-A58B-29813E398FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banker.Database", "Banker.Database\Banker.Database.csproj", "{DCD6E246-5FA3-4833-B185-4C9B625E4B3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Database", "Banker.Database\Banker.Database.csproj", "{DCD6E246-5FA3-4833-B185-4C9B625E4B3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
