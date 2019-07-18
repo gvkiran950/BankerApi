@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Banker.Database
 {
@@ -12,5 +11,17 @@ namespace Banker.Database
         }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>(user =>
+            {
+                user.ToTable("User");
+                user.HasKey("UserId");
+            });
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

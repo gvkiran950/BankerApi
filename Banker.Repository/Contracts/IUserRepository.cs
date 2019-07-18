@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Banker.Contracts
+namespace Banker.Repository.Contracts
 {
     public interface IUserRepository
     {
-        Task<bool> IsUserExist(UserViewModel userModel);
-        List<User> GetUsers();
+        User GetUser(UserViewModel userModel);
+        List<User> GetAllUsers();
     }
 }

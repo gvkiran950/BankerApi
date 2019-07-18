@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Banker.Database\Banker.Database.csproj" />
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Banker.Models\Banker.ViewModels.csproj" />
+    <ProjectReference Include="..\Banker.Repository\Banker.Repository.csproj" />
   </ItemGroup>
 
 </Project>

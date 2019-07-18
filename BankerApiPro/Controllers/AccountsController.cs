@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Banker.Contracts;
+using AutoMapper;
+using Banker.Database;
 using Banker.Models;
+using Banker.Repository.Contracts;
+using Banker.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,37 +21,52 @@ namespace BankerApiPro.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private IUserRepository _userRepository;
+        private IUserService _userService;
         private IConfiguration _config;
-
-        public AccountsController(IUserRepository userRepository, IConfiguration config)
+        private IMapper _mapper;
+        public AccountsController(IUserService userService, IConfiguration config,IMapper mapper)
         {
-            _userRepository = userRepository;
+            _userService = userService;
             _config = config;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
         [Route("[action]")]
         [HttpPost("Login")]
-        public async Task<IActionResult> Post([FromBody] UserModel userModel)
+        public  IActionResult Post([FromBody] UserViewModel userViewModel)
         {
             IActionResult response = Unauthorized();
             if (ModelState.IsValid)
             {
-                var result = await _userRepository.IsUserExist(userModel);
-                if (result)
-                    response = Ok(new { toke = GenerateJSONWebToken(userModel) });
+                UserViewModel userModel = _userService.GetUser(userViewModel);
+
+                if (userModel != null)
+                {                    
+                    userModel.Token = GenerateJSONWebToken(userViewModel);
+                    response = Ok(userModel);
+                }
             }
-            
+
             return response;
 
         }
 
+        [AllowAnonymous]
         //GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
+        }
+
+
+        //GET api/values
+        [Route("[action]")]
+        [HttpGet("SomeGetinfo")]
+        public ActionResult<IEnumerable<string>> GetList()
+        {
+            return new string[] { "value1", "value2", "value3", "value4" };
         }
 
         // GET api/values/5
@@ -77,14 +94,14 @@ namespace BankerApiPro.Controllers
         {
         }
 
-        private string GenerateJSONWebToken(UserModel userModel)
+        private string GenerateJSONWebToken(UserViewModel userViewModel)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha384);
 
             var claims = new[] {
-                new Claim("UserId",userModel.UserId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, userModel.UserName)
+                new Claim("UserId",userViewModel.UserId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, userViewModel.UserName)
             };
 
             var Token = new JwtSecurityToken
