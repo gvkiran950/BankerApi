@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Banker.Database;
+using Banker.Entity;
 using Banker.Models;
 using Banker.Repository.Contracts;
 using Banker.Service.Contracts;
@@ -17,8 +17,6 @@ namespace Banker.Service
         {
             _userRepository = userRepository;
             _mapper = mapper;
-
-
         }
 
         public List<User> GetAllUsers()
@@ -47,5 +45,11 @@ namespace Banker.Service
             }
         }
 
+        public UserViewModel InertUser(UserViewModel userViewModel)
+        {            
+            User user = _mapper.Map<User>(userViewModel);
+            var data = _userRepository.InsertUser(user);
+            return _mapper.Map<UserViewModel>(data);
+        }
     }
 }

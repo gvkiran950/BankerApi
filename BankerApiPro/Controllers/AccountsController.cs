@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Banker.Database;
+﻿using Banker.Api.Helpers;
 using Banker.Models;
-using Banker.Repository.Contracts;
 using Banker.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace BankerApiPro.Controllers
 {
@@ -21,20 +18,19 @@ namespace BankerApiPro.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private IUserService _userService;
-        private IConfiguration _config;
-        private IMapper _mapper;
-        public AccountsController(IUserService userService, IConfiguration config,IMapper mapper)
+        private readonly IUserService _userService;
+        private readonly IConfiguration _config;
+
+        public AccountsController(IUserService userService, IConfiguration config)
         {
             _userService = userService;
             _config = config;
-            _mapper = mapper;
         }
 
         [AllowAnonymous]
         [Route("[action]")]
         [HttpPost("Login")]
-        public  IActionResult Post([FromBody] UserViewModel userViewModel)
+        public IActionResult Post([FromBody] UserViewModel userViewModel)
         {
             IActionResult response = Unauthorized();
             if (ModelState.IsValid)
@@ -42,14 +38,32 @@ namespace BankerApiPro.Controllers
                 UserViewModel userModel = _userService.GetUser(userViewModel);
 
                 if (userModel != null)
-                {                    
+                {
                     userModel.Token = GenerateJSONWebToken(userViewModel);
                     response = Ok(userModel);
                 }
             }
 
             return response;
+        }
 
+
+        [AllowAnonymous]
+        [Route("[action]")]
+        [HttpPost("Create")]
+        public IActionResult CreateUser([FromBody] UserViewModel userViewModel)
+        {
+            IActionResult response = Unauthorized();
+            if (ModelState.IsValid)
+            {
+                byte[] salt = Security.GenerateSalt(32);
+                byte[] password = Encoding.ASCII.GetBytes(userViewModel.Password);
+                byte[] passwordHash = Security.GenerateHash(password, salt, 1001, 32);
+
+                //userViewModel.Password
+            }
+
+            return response;
         }
 
         [AllowAnonymous]
@@ -59,7 +73,6 @@ namespace BankerApiPro.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
 
         //GET api/values
         [Route("[action]")]
@@ -113,9 +126,6 @@ namespace BankerApiPro.Controllers
                 signingCredentials: credentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(Token);
-
         }
     }
-
-
 }

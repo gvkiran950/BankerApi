@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Banker.Service.Contracts;
+﻿using Banker.Entity;
 using Banker.Models;
-using Banker.Database;
-using AutoMapper;
+using Banker.Service.Contracts;
+using Banker.Utility.Contracts;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BankerApiPro.Controllers
 {
@@ -12,11 +13,11 @@ namespace BankerApiPro.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
-        public UsersController(IUserService userService,IMapper mapper)
+        private readonly IPasswordHasher _hash;
+        public UsersController(IUserService userService, IPasswordHasher hash)
         {
             _userService = userService;
-            _mapper = mapper;
+            _hash = hash;
         }
 
         // GET: api/Users
@@ -80,20 +81,21 @@ namespace BankerApiPro.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/Users
-        //[HttpPost]
-        //public async Task<IActionResult> PostUser([FromBody] User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Users
+        [Route("[action]")]
+        [HttpPost("Create")]
+        public async Task<IActionResult> PostUser([FromBody] UserViewModel user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    _context.Users.Add(user);
-        //    await _context.SaveChangesAsync();
+            user.Password = _hash.Hash(user.Password);
 
-        //    return CreatedAtAction("GetUser", new { id = user.UserId }, user);
-        //}
+            var data = _userService.InertUser(user);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+        }
 
         //// DELETE: api/Users/5
         //[HttpDelete("{id}")]

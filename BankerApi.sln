@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29025.244
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Api", "BankerApiPro\Banker.Api.csproj", "{A4AA12E2-C43A-4166-9F4B-849363542ABF}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Repository", "Banker
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Entity", "Banker.Database\Banker.Entity.csproj", "{DCD6E246-5FA3-4833-B185-4C9B625E4B3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banker.Service", "Banker.Service\Banker.Service.csproj", "{F12D45F7-2426-4182-9A18-4CD6D3AE83DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Banker.Service", "Banker.Service\Banker.Service.csproj", "{F12D45F7-2426-4182-9A18-4CD6D3AE83DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banker.Utility", "Banker.Utility\Banker.Utility.csproj", "{57298AB8-2DA2-406B-8FAD-AC07F1093C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F12D45F7-2426-4182-9A18-4CD6D3AE83DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12D45F7-2426-4182-9A18-4CD6D3AE83DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12D45F7-2426-4182-9A18-4CD6D3AE83DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57298AB8-2DA2-406B-8FAD-AC07F1093C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57298AB8-2DA2-406B-8FAD-AC07F1093C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57298AB8-2DA2-406B-8FAD-AC07F1093C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57298AB8-2DA2-406B-8FAD-AC07F1093C28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

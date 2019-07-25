@@ -1,13 +1,11 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Banker.Database
+namespace Banker.Entity
 {
     public class BankerDbContext : DbContext
     {
-        public BankerDbContext(DbContextOptions<BankerDbContext> options) :base(options)
+        public BankerDbContext(DbContextOptions<BankerDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<User> Users { get; set; }
@@ -22,6 +20,5 @@ namespace Banker.Database
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

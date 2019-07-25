@@ -1,11 +1,11 @@
-﻿using System.Text;
-using AutoMapper;
-using Banker.Api.Mappings;
-using Banker.Database;
+﻿using AutoMapper;
+using Banker.Entity;
 using Banker.Repository;
 using Banker.Repository.Contracts;
 using Banker.Service;
 using Banker.Service.Contracts;
+using Banker.Utility;
+using Banker.Utility.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-
+using System.Text;
 
 namespace BankerApiPro
 {
@@ -36,11 +36,11 @@ namespace BankerApiPro
             //{
             //    cfg.AddProfile(new MappingProfiles());
             //});
-
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(Startup));
-            //configure Jwt token 
+            //configure Jwt token
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
