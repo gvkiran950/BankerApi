@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Banker.Models\Banker.ViewModels.csproj" />
     <ProjectReference Include="..\Banker.Repository\Banker.Repository.csproj" />
   </ItemGroup>
 

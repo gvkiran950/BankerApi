@@ -19,9 +19,17 @@ namespace Banker.Service
             _mapper = mapper;
         }
 
-        public List<User> GetAllUsers()
+        public List<UserViewModel> GetAllUsers()
         {
-            return _userRepository.GetAllUsers();
+            try
+            {
+                var users = _userRepository.GetAllUsers();
+                return _mapper.Map<List<UserViewModel>>(users);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public UserViewModel GetUser(UserViewModel userViewModel)

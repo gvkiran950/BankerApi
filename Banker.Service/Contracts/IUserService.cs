@@ -8,7 +8,7 @@ namespace Banker.Service.Contracts
     {
         UserViewModel GetUser(UserViewModel userViewModel);
 
-        List<User> GetAllUsers();
+        List<UserViewModel> GetAllUsers();
 
         UserViewModel InertUser(UserViewModel userViewModel);
     }

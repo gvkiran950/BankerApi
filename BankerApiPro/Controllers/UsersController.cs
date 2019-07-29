@@ -22,7 +22,7 @@ namespace BankerApiPro.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<UserViewModel> GetUsers()
         {
             return _userService.GetAllUsers();
         }

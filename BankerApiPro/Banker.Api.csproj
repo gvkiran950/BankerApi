@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Banker.Database\Banker.Entity.csproj" />
     <ProjectReference Include="..\Banker.Repository\Banker.Repository.csproj" />
     <ProjectReference Include="..\Banker.Service\Banker.Service.csproj" />
     <ProjectReference Include="..\Banker.Utility\Banker.Utility.csproj" />
